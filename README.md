@@ -2,30 +2,37 @@
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/liujing04/Retrieval-based-Voice-Conversion-WebUI/blob/main/Retrieval_based_Voice_Conversion_WebUI.ipynb)
 
-缺失的2个文件夹和2个文件：
+## Setup
+Before training and inferencing, you need these files.
 
-hubert_base.pt
+- [hubert_base.pt](https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/hubert_base.pt)
+- [ffmpeg](https://ffmpeg.org/) (make sure `ffmpeg` command is executable yourself)
+- `pretrained` directory
+- `uvr5_weights` directory 
 
-ffmpeg（自己确保ffmpeg命令能执行就行）
+You can get these files here: https://huggingface.co/lj1995/VoiceConversionWebUI/tree/main
 
-pretrained文件夹
+We also provide `RVC-beta.7z` for easy use: [Download](https://huggingface.co/lj1995/VoiceConversionWebUI/blob/main/RVC-beta.7z)
 
-uvr5_weights文件夹
+### Setting up Python environment
+We recommend you use `venv`.
 
-文件太大github传不动，去huggingface上下https://huggingface.co/lj1995/VoiceConversionWebUI/tree/main
+```sh
+$ python -m venv venv
+```
 
-当然你也可以直接看看RVC-beta.7z这个文件→_→
+```sh
+$ pip install -r requirements.txt
+```
 
-按照requirements.txt用pip装好环境，python infer-web.py就能用了
+After that, you can execute `python infer-web.py`.
 
-根据经验，librosa numpy和numba三个包最好写死版本否则容易有坑，其他的包版本不太重要
+From our experience, the versions of `librosa`, `numpy` and `numba` are troublesome, but other packages are not so important.
 
-宣传视频：https://www.bilibili.com/video/BV1pm4y1z7Gm/
+## How to use
+Check `小白简易教程.doc`.
 
-教程见小白简易教程.doc
-
-We will develop an English version windows WebUI APP in 2 weeks.
-
+Promotional video: https://www.bilibili.com/video/BV1pm4y1z7Gm/
 
 ### Realtime Voice Conversion Software using RVC
 
