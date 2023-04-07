@@ -32,6 +32,10 @@ From our experience, the versions of `librosa`, `numpy` and `numba` are troubles
 ## How to use
 Check `小白简易教程.doc`.
 
+### Training
+- https://rentry.co/cxuc3
+- [「RVC」+「VC Client」で自分の声を任意の声にリアルタイム変換しよう！](https://eyatu-vrc.hatenablog.com/entry/2023/04/06/193512)
+
 Promotional video: https://www.bilibili.com/video/BV1pm4y1z7Gm/
 
 ### Realtime Voice Conversion Software using RVC
