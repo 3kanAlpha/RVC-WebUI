@@ -189,7 +189,7 @@ def change_choices():
     return {"choices": sorted(names), "__type__": "update"}
 def clean():return {"value": "", "__type__": "update"}
 def change_f0(if_f0_3,sr2):#np7, f0method8,pretrained_G14,pretrained_D15
-    if(if_f0_3=="是"):return {"visible": True, "__type__": "update"},{"visible": True, "__type__": "update"},"pretrained/f0G%s.pth"%sr2,"pretrained/f0D%s.pth"%sr2
+    if(if_f0_3=="Yes"):return {"visible": True, "__type__": "update"},{"visible": True, "__type__": "update"},"pretrained/f0G%s.pth"%sr2,"pretrained/f0D%s.pth"%sr2
     return {"visible": False, "__type__": "update"}, {"visible": False, "__type__": "update"},"pretrained/G%s.pth"%sr2,"pretrained/D%s.pth"%sr2
 
 sr_dict={
@@ -282,7 +282,7 @@ def extract_f0_feature(gpus,n_p,f0method,if_f0,exp_dir):
     print(log)
     yield log
 def change_sr2(sr2,if_f0_3):
-    if(if_f0_3=="是"):return "pretrained/f0G%s.pth"%sr2,"pretrained/f0D%s.pth"%sr2
+    if(if_f0_3=="Yes"):return "pretrained/f0G%s.pth"%sr2,"pretrained/f0D%s.pth"%sr2
     else:return "pretrained/G%s.pth"%sr2,"pretrained/D%s.pth"%sr2
 #but3.click(click_train,[exp_dir1,sr2,if_f0_3,save_epoch10,total_epoch11,batch_size12,if_save_latest13,pretrained_G14,pretrained_D15,gpus16])
 def click_train(exp_dir1,sr2,if_f0_3,spk_id5,save_epoch10,total_epoch11,batch_size12,if_save_latest13,pretrained_G14,pretrained_D15,gpus16,if_cache_gpu17):
@@ -291,7 +291,7 @@ def click_train(exp_dir1,sr2,if_f0_3,spk_id5,save_epoch10,total_epoch11,batch_si
     os.makedirs(exp_dir,exist_ok=True)
     gt_wavs_dir="%s/0_gt_wavs"%(exp_dir)
     co256_dir="%s/3_feature256"%(exp_dir)
-    if(if_f0_3=="是"):
+    if(if_f0_3=="Yes"):
         f0_dir = "%s/2a_f0" % (exp_dir)
         f0nsf_dir="%s/2b-f0nsf"%(exp_dir)
         names=set([name.split(".")[0]for name in os.listdir(gt_wavs_dir)])&set([name.split(".")[0]for name in os.listdir(co256_dir)])&set([name.split(".")[0]for name in os.listdir(f0_dir)])&set([name.split(".")[0]for name in os.listdir(f0nsf_dir)])
@@ -299,7 +299,7 @@ def click_train(exp_dir1,sr2,if_f0_3,spk_id5,save_epoch10,total_epoch11,batch_si
         names=set([name.split(".")[0]for name in os.listdir(gt_wavs_dir)])&set([name.split(".")[0]for name in os.listdir(co256_dir)])
     opt=[]
     for name in names:
-        if (if_f0_3 == "是"):
+        if (if_f0_3 == "Yes"):
             opt.append("%s/%s.wav|%s/%s.npy|%s/%s.wav.npy|%s/%s.wav.npy|%s"%(gt_wavs_dir.replace("\\","\\\\"),name,co256_dir.replace("\\","\\\\"),name,f0_dir.replace("\\","\\\\"),name,f0nsf_dir.replace("\\","\\\\"),name,spk_id5))
         else:
             opt.append("%s/%s.wav|%s/%s.npy|%s"%(gt_wavs_dir.replace("\\","\\\\"),name,co256_dir.replace("\\","\\\\"),name,spk_id5))
@@ -364,7 +364,7 @@ def train1key(exp_dir1, sr2, if_f0_3, trainset_dir4, spk_id5, gpus6, np7, f0meth
     with open("%s/logs/%s/preprocess.log" % (now_dir, exp_dir1), "r")as f: print(f.read())
     #########step2a:提取音高
     open("%s/logs/%s/extract_f0_feature.log" % (now_dir, exp_dir1), "w")
-    if(if_f0_3=="是"):
+    if(if_f0_3=="Yes"):
         yield get_info_str("step2a: Pitch extraction in progress")
         cmd=python_cmd + " extract_f0_print.py %s/logs/%s %s %s"%(now_dir,exp_dir1,np7,f0method8)
         yield get_info_str(cmd)
@@ -390,7 +390,7 @@ def train1key(exp_dir1, sr2, if_f0_3, trainset_dir4, spk_id5, gpus6, np7, f0meth
     exp_dir="%s/logs/%s"%(now_dir,exp_dir1)
     gt_wavs_dir="%s/0_gt_wavs"%(exp_dir)
     co256_dir="%s/3_feature256"%(exp_dir)
-    if(if_f0_3=="是"):
+    if(if_f0_3=="Yes"):
         f0_dir = "%s/2a_f0" % (exp_dir)
         f0nsf_dir="%s/2b-f0nsf"%(exp_dir)
         names=set([name.split(".")[0]for name in os.listdir(gt_wavs_dir)])&set([name.split(".")[0]for name in os.listdir(co256_dir)])&set([name.split(".")[0]for name in os.listdir(f0_dir)])&set([name.split(".")[0]for name in os.listdir(f0nsf_dir)])
@@ -398,7 +398,7 @@ def train1key(exp_dir1, sr2, if_f0_3, trainset_dir4, spk_id5, gpus6, np7, f0meth
         names=set([name.split(".")[0]for name in os.listdir(gt_wavs_dir)])&set([name.split(".")[0]for name in os.listdir(co256_dir)])
     opt=[]
     for name in names:
-        if (if_f0_3 == "是"):
+        if (if_f0_3 == "Yes"):
             opt.append("%s/%s.wav|%s/%s.npy|%s/%s.wav.npy|%s/%s.wav.npy|%s"%(gt_wavs_dir.replace("\\","\\\\"),name,co256_dir.replace("\\","\\\\"),name,f0_dir.replace("\\","\\\\"),name,f0nsf_dir.replace("\\","\\\\"),name,spk_id5))
         else:
             opt.append("%s/%s.wav|%s/%s.npy|%s"%(gt_wavs_dir.replace("\\","\\\\"),name,co256_dir.replace("\\","\\\\"),name,spk_id5))
@@ -533,56 +533,56 @@ with gr.Blocks() as app:
                     but2.click(uvr, [model_choose, dir_wav_input,opt_vocal_root,wav_inputs,opt_ins_root], [vc_output4])
         with gr.TabItem("Training"):
             gr.Markdown(value="""
-                step1：填写实验配置。实验数据放在logs下，每个实验一个文件夹，需手工输入实验名路径，内含实验配置，日志，训练得到的模型文件。
+                Step 1: 填写实验配置。实验数据放在logs下，每个实验一个文件夹，需手工输入实验名路径，内含实验配置，日志，训练得到的模型文件。
                 """)
             with gr.Row():
-                exp_dir1 = gr.Textbox(label="输入实验名",value="mi-test")
-                sr2 = gr.Radio(label="目标采样率", choices=["32k","40k","48k"],value="40k", interactive=True)
-                if_f0_3 = gr.Radio(label="模型是否带音高指导(唱歌一定要，语音可以不要)", choices=["是","否"],value="是", interactive=True)
+                exp_dir1 = gr.Textbox(label="Experiment Name",value="mi-test")
+                sr2 = gr.Radio(label="Target Sample Rate", choices=["32k","40k","48k"],value="40k", interactive=True)
+                if_f0_3 = gr.Radio(label="The model has pitch guidance? (required for singing, otherwise not)", choices=["Yes","No"],value="Yes", interactive=True)
             with gr.Group():#暂时单人的，后面支持最多4人的#数据处理
                 gr.Markdown(value="""
-                    step2a：自动遍历训练文件夹下所有可解码成音频的文件并进行切片归一化，在实验目录下生成2个wav文件夹；暂时只支持单人训练。
+                    Step 2a: Automatically traverse all files that can be decoded into audio under the training folder and slice and normalize them to generate 2 wav folders under the experiment directory; now only support single speaker training
                     """)
                 with gr.Row():
-                    trainset_dir4 = gr.Textbox(label="输入训练文件夹路径",value="E:\语音音频+标注\米津玄师\src")
-                    spk_id5 = gr.Slider(minimum=0, maximum=4, step=1, label='请指定说话人id', value=0,interactive=True)
-                    but1=gr.Button("处理数据", variant="primary")
-                    info1=gr.Textbox(label="输出信息",value="")
+                    trainset_dir4 = gr.Textbox(label="Path to training directory",value="E:\语音音频+标注\米津玄师\src")
+                    spk_id5 = gr.Slider(minimum=0, maximum=4, step=1, label='Speaker ID', value=0,interactive=True)
+                    but1 = gr.Button("Process", variant="primary")
+                    info1 = gr.Textbox(label="Log",value="")
                     but1.click(preprocess_dataset,[trainset_dir4,exp_dir1,sr2],[info1])
             with gr.Group():
                 gr.Markdown(value="""
-                    step2b：使用CPU提取音高(如果模型带音高)，使用GPU提取特征(选择卡号)
+                    Step 2b: Extract pitch using CPU (if model with pitch), and extract features using GPU (select card number)
                     """)
                 with gr.Row():
                     with gr.Column():
-                        gpus6 = gr.Textbox(label="以-分隔输入使用的卡号，例如   0-1-2   使用卡0和卡1和卡2",value=gpus,interactive=True)
-                        gpu_info9 = gr.Textbox(label="显卡信息",value=gpu_info)
+                        gpus6 = gr.Textbox(label="Graphic card numbers separated by -, eg. 0-1-2 means card 0, 1 and 2 are to be used",value=gpus,interactive=True)
+                        gpu_info9 = gr.Textbox(label="Graphic Card Info",value=gpu_info)
                     with gr.Column():
-                        np7 = gr.Slider(minimum=0, maximum=ncpu, step=1, label='提取音高使用的CPU进程数', value=ncpu,interactive=True)
-                        f0method8 = gr.Radio(label="选择音高提取算法:输入歌声可用pm提速,高质量语音但CPU差可用dio提速,harvest质量更好但慢", choices=["pm", "harvest","dio"], value="harvest", interactive=True)
-                    but2=gr.Button("特征提取", variant="primary")
-                    info2=gr.Textbox(label="输出信息",value="",max_lines=8)
+                        np7 = gr.Slider(minimum=0, maximum=ncpu, step=1, label='Number of CPU threads used for pitch extraction', value=ncpu,interactive=True)
+                        f0method8 = gr.Radio(label="Select pitch extraction algorithm: 输入歌声可用pm提速,高质量语音但CPU差可用dio提速,harvest质量更好但慢", choices=["pm", "harvest","dio"], value="harvest", interactive=True)
+                    but2=gr.Button("Extract Feature", variant="primary")
+                    info2=gr.Textbox(label="Log",value="",max_lines=8)
                     but2.click(extract_f0_feature,[gpus6,np7,f0method8,if_f0_3,exp_dir1],[info2])
             with gr.Group():
                 gr.Markdown(value="""
-                    step3：填写训练设置，开始训练模型和索引
+                    Step 3: Fill in the training settings, and start training the model and index
                     """)
                 with gr.Row():
-                    save_epoch10 = gr.Slider(minimum=0, maximum=50, step=1, label='保存频率save_every_epoch', value=5,interactive=True)
-                    total_epoch11 = gr.Slider(minimum=0, maximum=100, step=1, label='总训练轮数total_epoch', value=10,interactive=True)
+                    save_epoch10 = gr.Slider(minimum=0, maximum=50, step=1, label='Interval to save checkpoints save_every_epoch', value=5,interactive=True)
+                    total_epoch11 = gr.Slider(minimum=0, maximum=100, step=1, label='total_epoch', value=10,interactive=True)
                     batch_size12 = gr.Slider(minimum=0, maximum=32, step=1, label='batch_size', value=4,interactive=True)
-                    if_save_latest13 = gr.Radio(label="是否仅保存最新的ckpt文件以节省硬盘空间", choices=["是", "否"], value="否", interactive=True)
-                    if_cache_gpu17 = gr.Radio(label="是否缓存所有训练集至显存。10min以下小数据可缓存以加速训练，大数据缓存会炸显存也加不了多少速", choices=["是", "否"], value="否", interactive=True)
+                    if_save_latest13 = gr.Radio(label="Whether to save only the latest ckpt files to save hard disk space", choices=["是", "否"], value="否", interactive=True)
+                    if_cache_gpu17 = gr.Radio(label="Whether to cache all training sets to video memory.", choices=["是", "否"], value="否", interactive=True)
                 with gr.Row():
                     pretrained_G14 = gr.Textbox(label="加载预训练底模G路径", value="pretrained/f0G40k.pth",interactive=True)
                     pretrained_D15 = gr.Textbox(label="加载预训练底模D路径", value="pretrained/f0D40k.pth",interactive=True)
                     sr2.change(change_sr2, [sr2,if_f0_3], [pretrained_G14,pretrained_D15])
                     if_f0_3.change(change_f0, [if_f0_3, sr2], [np7, f0method8, pretrained_G14, pretrained_D15])
-                    gpus16 = gr.Textbox(label="以-分隔输入使用的卡号，例如   0-1-2   使用卡0和卡1和卡2", value=gpus,interactive=True)
-                    but3 = gr.Button("训练模型", variant="primary")
-                    but4 = gr.Button("训练特征索引", variant="primary")
-                    but5 = gr.Button("一键训练", variant="primary")
-                    info3 = gr.Textbox(label="输出信息", value="",max_lines=10)
+                    gpus16 = gr.Textbox(label="Graphic card numbers separated by -, eg. 0-1-2 means card 0, 1 and 2 are to be used", value=gpus,interactive=True)
+                    but3 = gr.Button("Train Model", variant="primary")
+                    but4 = gr.Button("Train Feature Index", variant="primary")
+                    but5 = gr.Button("One-click Training", variant="primary")
+                    info3 = gr.Textbox(label="Log", value="",max_lines=10)
                     but3.click(click_train,[exp_dir1,sr2,if_f0_3,spk_id5,save_epoch10,total_epoch11,batch_size12,if_save_latest13,pretrained_G14,pretrained_D15,gpus16,if_cache_gpu17],info3)
                     but4.click(train_index,[exp_dir1],info3)
                     but5.click(train1key,[exp_dir1,sr2,if_f0_3,trainset_dir4,spk_id5,gpus6,np7,f0method8,save_epoch10,total_epoch11,batch_size12,if_save_latest13,pretrained_G14,pretrained_D15,gpus16,if_cache_gpu17],info3)
