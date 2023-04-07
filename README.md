@@ -29,6 +29,9 @@ After that, you can execute `python infer-web.py`.
 
 From our experience, the versions of `librosa`, `numpy` and `numba` are troublesome, but other packages are not so important.
 
+**If you have GPU:**  
+Before installing the packages from `requirements.txt`, you should install [PyTorch](https://pytorch.org/) separately.
+
 ## How to use
 Check `小白简易教程.doc`.
 
